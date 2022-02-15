@@ -1,5 +1,4 @@
 django
 django-dotenv
 gunicorn
-numpy
 black

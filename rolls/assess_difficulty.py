@@ -1,3 +1,4 @@
+'''
 import numpy as np
 
 
@@ -63,3 +64,4 @@ def assess_difficulty(dice, obstacle):
         return f"{dice} dice for an Ob{obstacle}: this is a challenging test."
 
     return None
+    '''
