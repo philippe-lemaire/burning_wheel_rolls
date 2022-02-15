@@ -26,45 +26,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">Characters</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Create character</a></li>
-                            <li><a class="dropdown-item" href="#">My characters</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">My dead characters</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'bestiary:index' %}">Bestiary</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'territories:index' %}">Territories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Encounters</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                            aria-expanded="false">{{ user.username }}</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Edit profile</a></li>
 
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
-                        </ul>
-                    </li>
-                    {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="/auth/login">Login</a>
+                        <a class="nav-link" href="{% url 'rolls:roll_dice' %}">Roll dice</a>
                     </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'rolls:assess_difficulty' %}">Assess difficulty</a>
+                    </li>
+
+
                 </ul>
             </div>
         </div>
