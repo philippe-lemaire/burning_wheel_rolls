@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+
+
+
+
+<form action="{% url 'rolls:roll_dice' %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <h1>Let's Roll</h1>
+        </legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+
+        <input type="radio" name="choice" id="1" value="1">
+        <label for="1">1</label><br>
+
+    </fieldset>
+    <input type="submit" value="Roll">
+</form>
+
+
+
+{% endblock %}
