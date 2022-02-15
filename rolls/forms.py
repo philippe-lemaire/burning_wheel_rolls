@@ -1,12 +1,14 @@
 from django import forms
 
+shade_choices = [
+    ("B", "Black"),
+    ("G", "Gray"),
+    ("W", "White"),
+]
+
 
 class RollForm(forms.Form):
-    shade_choices = [
-        ("B", "Black"),
-        ("G", "Gray"),
-        ("W", "White"),
-    ]
+
     shade = forms.ChoiceField(
         label="Abiltity shade",
         choices=shade_choices,

@@ -23,7 +23,16 @@ def roll_dice(request):
                 shade=shade, dice=dice, obstacle=obstacle, open_ended=open_ended
             )
 
-            context = {"form": form, "rolls": rolls, "result": result}
+            context = {
+                "form": form,
+                "rolls": rolls,
+                "result": result,
+            }
+            request.session["shade"] = shade
+            request.session["obstacle"] = obstacle
+            request.session["last_roll"] = roll
+            request.session["form"] = form
+
             return render(
                 request, template_name="rolls/roll_dice.html", context=context
             )
@@ -33,6 +42,29 @@ def roll_dice(request):
         form = RollForm()
 
     return render(request, "rolls/roll_dice.html", {"form": form})
+
+
+def roll_luck(request):
+    if request.method == "POST":
+        # retrieve variables
+        shade = request.session["shade"]
+        obstacle = request.session["obstacle"]
+        last_roll = request.session["last_roll"]
+        form = request.session["form"]
+
+        # call the roll function
+        rolls, result = roll(
+            shade=shade, obstacle=obstacle, luck=True, last_roll=last_roll
+        )
+
+        # create new context
+        context = {
+            "form": form,
+            "rolls": rolls,
+            "result": result,
+            "used_luck": True,
+        }
+        return render(request, "rolls/roll_dice.html", {"form": form})
 
 
 def assess_difficulty(request):

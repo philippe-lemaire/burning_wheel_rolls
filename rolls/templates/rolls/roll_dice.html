@@ -23,7 +23,11 @@
 {% endfor %}
 <br><br>
 <p>{{ result }}</p>
-
 {% endif %}
 
+{% if rolls and not used_luck %}
+
+<a href="{% url 'rolls:roll_luck' %}">Spend artha to make roll open ended.</a>
+
+{% endif %}
 {% endblock %}
