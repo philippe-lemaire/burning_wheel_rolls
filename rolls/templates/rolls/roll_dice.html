@@ -27,7 +27,11 @@
 
 {% if rolls and not used_luck %}
 
-<a href="{% url 'rolls:roll_luck' %}">Spend artha to make roll open ended.</a>
 
+<form action="{% url 'rolls:roll_luck' %}" method="post">
+    {% csrf_token %}
+
+    <input type="submit" value="Spend artha to make roll open ended.">
+</form>
 {% endif %}
 {% endblock %}

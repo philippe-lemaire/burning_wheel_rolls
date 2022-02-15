@@ -28,10 +28,11 @@ def roll_dice(request):
                 "rolls": rolls,
                 "result": result,
             }
+
             request.session["shade"] = shade
             request.session["obstacle"] = obstacle
-            request.session["last_roll"] = roll
-            request.session["form"] = form
+            request.session["last_roll"] = rolls
+            request.session["form"] = form.cleaned_data
 
             return render(
                 request, template_name="rolls/roll_dice.html", context=context
@@ -50,7 +51,8 @@ def roll_luck(request):
         shade = request.session["shade"]
         obstacle = request.session["obstacle"]
         last_roll = request.session["last_roll"]
-        form = request.session["form"]
+        form_data = request.session["form"]
+        form = RollForm(form_data)
 
         # call the roll function
         rolls, result = roll(
@@ -59,12 +61,12 @@ def roll_luck(request):
 
         # create new context
         context = {
-            "form": form,
             "rolls": rolls,
             "result": result,
             "used_luck": True,
+            "form": form,
         }
-        return render(request, "rolls/roll_dice.html", {"form": form})
+        return render(request, "rolls/roll_dice.html", context=context)
 
 
 def assess_difficulty(request):
