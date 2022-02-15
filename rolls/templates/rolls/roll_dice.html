@@ -4,15 +4,16 @@
 {% block content %}
 
 
+<h1>Burning Wheel Rolls</h1>
 
-
-
+<br>
 
 <form action="{% url 'rolls:roll_dice' %}" method="post">
     {% csrf_token %}
     <table>
         {{ form.as_table }}
     </table>
+    <br>
     <input type="submit" value="Roll">
 </form>
 
@@ -25,13 +26,17 @@
 <p>{{ result }}</p>
 {% endif %}
 
-{% if rolls and not used_luck %}
+{% if 6 in rolls and not used_luck %}
 
+<h2>Spend Artha to get Lucky</h2>
+
+<p>Your roll included at least a 6. By spending a Fate point, you can can make the roll open ended and roll one die for
+    each 6 you had, and an extra die for each new 6 you get.</p>
 
 <form action="{% url 'rolls:roll_luck' %}" method="post">
     {% csrf_token %}
 
-    <input type="submit" value="Spend artha to make roll open ended.">
+    <input type="submit" value="Spend a Fate Point.">
 </form>
 {% endif %}
 {% endblock %}
