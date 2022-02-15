@@ -1,3 +1,4 @@
+from turtle import onclick
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -13,10 +14,20 @@ def roll_dice(request):
         form = RollForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return render(request, template_name="rolls/roll_dice.html")
+            # retrieve the values from the form
+            shade = form.cleaned_data["shade"]
+            dice = form.cleaned_data["dice"]
+            obstacle = form.cleaned_data["obstacle"]
+            open_ended = form.cleaned_data["open_ended"]
+            # call the roll function
+            rolls, result = roll(
+                shade=shade, dice=dice, obstacle=obstacle, open_ended=open_ended
+            )
+
+            context = {"form": form, "rolls": rolls, "result": result}
+            return render(
+                request, template_name="rolls/roll_dice.html", context=context
+            )
 
     # if a GET (or any other method) we'll create a blank form
     else:

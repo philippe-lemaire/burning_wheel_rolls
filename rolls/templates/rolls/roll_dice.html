@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% block content %}
 
 
@@ -9,10 +10,20 @@
 
 <form action="{% url 'rolls:roll_dice' %}" method="post">
     {% csrf_token %}
-    {{ form }}
+    <table>
+        {{ form.as_table }}
+    </table>
     <input type="submit" value="Roll">
 </form>
 
+{% if rolls %}
+<br><br>
+{% for die in rolls %}
+<img src="{% static 'rolls/img/' %}{{die}}.png " />
+{% endfor %}
+<br><br>
+<p>{{ result }}</p>
 
+{% endif %}
 
 {% endblock %}
