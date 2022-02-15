@@ -27,6 +27,7 @@ def roll_dice(request):
                 "form": form,
                 "rolls": rolls,
                 "result": result,
+                "open_ended": open_ended,
             }
 
             request.session["shade"] = shade
