@@ -43,9 +43,10 @@ def roll_dice(request):
                 "open_ended": open_ended,
                 "difficulty": assessed_difficulty,
             }
-
+            # store values in session for luck mechanic
             request.session["shade"] = shade
             request.session["obstacle"] = obstacle
+            request.session["assessed_difficulty"] = assessed_difficulty
             request.session["last_roll"] = rolls
             request.session["form"] = form.cleaned_data
 
@@ -66,6 +67,7 @@ def roll_luck(request):
         shade = request.session["shade"]
         obstacle = request.session["obstacle"]
         last_roll = request.session["last_roll"]
+        assessed_difficulty = request.session["assessed_difficulty"]
         form_data = request.session["form"]
         form = RollForm(form_data)
 
@@ -80,6 +82,7 @@ def roll_luck(request):
             "result": result,
             "used_luck": True,
             "form": form,
+            "difficulty": assessed_difficulty,
         }
         return render(request, "rolls/roll_dice.html", context=context)
 
