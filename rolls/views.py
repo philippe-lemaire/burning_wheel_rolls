@@ -1,4 +1,3 @@
-from black import diff
 from django.http import HttpResponse
 from django.shortcuts import render
 
