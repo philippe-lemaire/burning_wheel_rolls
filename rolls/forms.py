@@ -37,3 +37,17 @@ class RollForm(forms.Form):
     )
 
     open_ended = forms.BooleanField(label="Is the roll open-ended?", required=False)
+
+
+class AssessDifficultyForm(forms.Form):
+    natural_dice = forms.IntegerField(
+        label="How many dice did you roll from exponent, help and FoRKs?",
+        min_value=0,
+        max_value=13,
+    )
+
+    obstacle = forms.IntegerField(
+        label="What was the obstacle?",
+        min_value=1,
+        max_value=13,
+    )

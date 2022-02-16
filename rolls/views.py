@@ -4,7 +4,7 @@ from django.shortcuts import render
 from .roll import roll
 from .assess_difficulty import difficulty
 
-from .forms import RollForm
+from .forms import RollForm, AssessDifficultyForm
 
 
 def roll_dice(request):
@@ -88,4 +88,26 @@ def roll_luck(request):
 
 
 def assess_difficulty(request):
-    return HttpResponse("Hello, do you want to assess difficulty?")
+    if request.method == "POST":
+        # create a form instance and populate it with data from the request:
+        form = AssessDifficultyForm(request.POST)
+        if form.is_valid():
+            # retrieve the values from the form
+            natural_dice = form.cleaned_data["natural_dice"]
+            obstacle = form.cleaned_data["obstacle"]
+
+            # assess the difficulty
+            assessed_difficulty = difficulty(natural_dice, obstacle)
+
+            # build the context
+            context = {
+                "form": form,
+                "difficulty": assessed_difficulty,
+            }
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = AssessDifficultyForm()
+        context = {"form": form}
+
+    return render(request, "rolls/assess_difficulty.html", context=context)

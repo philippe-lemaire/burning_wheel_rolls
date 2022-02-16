@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+
+<h1>Burning Wheel Rolls</h1>
+
+<br>
+
+<form action="{% url 'rolls:assess_difficulty' %}" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input type="submit" value="Assess">
+</form>
+
+{% if difficulty %}
+<br>
+
+<h2>Difficulty</h2>
+<p>{{difficulty}}</p>
+
+{% endif %}
+
+{% endblock %}
