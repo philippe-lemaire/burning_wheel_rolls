@@ -23,7 +23,11 @@
 <img src="{% static 'rolls/img/' %}{{die}}.png " />
 {% endfor %}
 <br><br>
+<h2>Result</h2>
 <p>{{ result }}</p>
+
+<h2>Difficulty</h2>
+<p>{{difficulty}}</p>
 {% endif %}
 
 {% if 6 in rolls and not used_luck and not open_ended %}

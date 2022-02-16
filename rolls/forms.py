@@ -1,3 +1,4 @@
+from mimetypes import init
 from django import forms
 
 shade_choices = [
@@ -14,11 +15,21 @@ class RollForm(forms.Form):
         choices=shade_choices,
     )
 
-    dice = forms.IntegerField(
-        label="How many dice are you rolling?",
-        min_value=1,
+    natural_dice = forms.IntegerField(
+        label="How many dice are you rolling from exponent, help and FoRKs?",
+        min_value=0,
         max_value=13,
+        initial=1,
     )
+
+    artha_dice = forms.IntegerField(
+        label="How many extra dice are you rolling from Artha spending?",
+        min_value=0,
+        max_value=10,
+        initial=0,
+        required=False,
+    )
+
     obstacle = forms.IntegerField(
         label="What is the obstacle?",
         min_value=1,

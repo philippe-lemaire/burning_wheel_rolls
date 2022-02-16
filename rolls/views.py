@@ -1,7 +1,9 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from black import diff
+from django.http import HttpResponse
 from django.shortcuts import render
 
 from .roll import roll
+from .assess_difficulty import difficulty
 
 from .forms import RollForm
 
@@ -15,19 +17,32 @@ def roll_dice(request):
         if form.is_valid():
             # retrieve the values from the form
             shade = form.cleaned_data["shade"]
-            dice = form.cleaned_data["dice"]
+            natural_dice = form.cleaned_data["natural_dice"]
+            artha_dice = form.cleaned_data["artha_dice"]
             obstacle = form.cleaned_data["obstacle"]
             open_ended = form.cleaned_data["open_ended"]
+
+            # count dice rolled
+            if not artha_dice:
+                artha_dice = 0
+
+            dice_rolled = natural_dice + artha_dice
+
             # call the roll function
             rolls, result = roll(
-                shade=shade, dice=dice, obstacle=obstacle, open_ended=open_ended
+                shade=shade, dice=dice_rolled, obstacle=obstacle, open_ended=open_ended
             )
 
+            # assess the difficulty
+            assessed_difficulty = difficulty(natural_dice, obstacle)
+
+            # build the context
             context = {
                 "form": form,
                 "rolls": rolls,
                 "result": result,
                 "open_ended": open_ended,
+                "difficulty": assessed_difficulty,
             }
 
             request.session["shade"] = shade

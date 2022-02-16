@@ -1,11 +1,11 @@
 import numpy as np
 
 
-def assess_difficulty(dice, obstacle):
+def difficulty(dice, obstacle):
     """Prints out the difficulty of the test to log for advancement based on the dice rolled and the obstacle.
     Dice granted by artha spending do not count in the dice total.
     Example use:
-    assess_difficulty(dice=5, obstacle=5)
+    difficulty(dice=5, obstacle=5)
     Prints: '5 dice for an Ob5: this is a difficult test.'
     """
 
@@ -61,5 +61,3 @@ def assess_difficulty(dice, obstacle):
         return f"{dice} dice for an Ob{obstacle}: this is a difficult test."
     if difficulty == 2:
         return f"{dice} dice for an Ob{obstacle}: this is a challenging test."
-
-    return None
