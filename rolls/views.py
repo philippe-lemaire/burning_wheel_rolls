@@ -46,6 +46,7 @@ def roll_dice(request):
                 "result": result,
                 "open_ended": open_ended,
                 "difficulty": assessed_difficulty,
+                "shade": shade,
             }
             # store values in session for luck mechanic
             request.session["shade"] = shade
