@@ -11,43 +11,36 @@ shade_choices = [
 class RollForm(forms.Form):
 
     shade = forms.ChoiceField(
-        label="Abiltity shade",
+        label="What is the Shade?",
         choices=shade_choices,
     )
 
-    natural_dice = forms.IntegerField(
-        label="How many dice are you rolling from exponent, help and FoRKs?",
-        min_value=0,
-        max_value=13,
-        initial=1,
+    natural_dice = forms.ChoiceField(
+        label="How many dice are you rolling from exponent, advantage, help and FoRKs?",
+        choices=[(n, n) for n in range(13)],
     )
 
-    artha_dice = forms.IntegerField(
+    artha_dice = forms.ChoiceField(
         label="How many extra dice are you rolling from Artha spending?",
-        min_value=0,
-        max_value=10,
-        initial=0,
+        choices=[(n, n) for n in range(14)],
         required=False,
     )
 
-    obstacle = forms.IntegerField(
+    obstacle = forms.ChoiceField(
         label="What is the obstacle?",
-        min_value=1,
-        max_value=13,
+        choices=[(n, n) for n in range(1, 14)],
     )
 
     open_ended = forms.BooleanField(label="Is the roll open-ended?", required=False)
 
 
 class AssessDifficultyForm(forms.Form):
-    natural_dice = forms.IntegerField(
-        label="How many dice did you roll from exponent, help and FoRKs?",
-        min_value=0,
-        max_value=13,
+    natural_dice = forms.ChoiceField(
+        label="How many dice are you rolling from exponent, advantage, help and FoRKs?",
+        choices=[(n, n) for n in range(13)],
     )
 
-    obstacle = forms.IntegerField(
-        label="What was the obstacle?",
-        min_value=1,
-        max_value=13,
+    obstacle = forms.ChoiceField(
+        label="What is the obstacle?",
+        choices=[(n, n) for n in range(1, 14)],
     )

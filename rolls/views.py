@@ -16,9 +16,13 @@ def roll_dice(request):
         if form.is_valid():
             # retrieve the values from the form
             shade = form.cleaned_data["shade"]
-            natural_dice = form.cleaned_data["natural_dice"]
-            artha_dice = form.cleaned_data["artha_dice"]
-            obstacle = form.cleaned_data["obstacle"]
+            natural_dice = int(form.cleaned_data.get("natural_dice", 0))
+            artha_dice = form.cleaned_data.get("artha_dice")
+            if artha_dice is None:
+                artha_dice = 0
+            else:
+                artha_dice = int(artha_dice)
+            obstacle = int(form.cleaned_data["obstacle"])
             open_ended = form.cleaned_data["open_ended"]
 
             # count dice rolled
@@ -65,7 +69,7 @@ def roll_luck(request):
     if request.method == "POST":
         # retrieve variables
         shade = request.session["shade"]
-        obstacle = request.session["obstacle"]
+        obstacle = int(request.session["obstacle"])
         last_roll = request.session["last_roll"]
         assessed_difficulty = request.session["assessed_difficulty"]
         form_data = request.session["form"]
@@ -93,8 +97,8 @@ def assess_difficulty(request):
         form = AssessDifficultyForm(request.POST)
         if form.is_valid():
             # retrieve the values from the form
-            natural_dice = form.cleaned_data["natural_dice"]
-            obstacle = form.cleaned_data["obstacle"]
+            natural_dice = int(form.cleaned_data["natural_dice"])
+            obstacle = int(form.cleaned_data["obstacle"])
 
             # assess the difficulty
             assessed_difficulty = difficulty(natural_dice, obstacle)
