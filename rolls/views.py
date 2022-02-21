@@ -87,6 +87,7 @@ def roll_luck(request):
             "result": result,
             "used_luck": True,
             "form": form,
+            "shade": shade,
             "difficulty": assessed_difficulty,
         }
         return render(request, "rolls/roll_dice.html", context=context)
