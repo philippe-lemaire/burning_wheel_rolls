@@ -4,13 +4,13 @@
 {% block content %}
 
 
-<h1>Burning Wheel Rolls</h1>
+<h1>Burning Wheel Assess Difficulty</h1>
 
 <br>
 
 <form action="{% url 'rolls:assess_difficulty' %}" method="post">
     {% csrf_token %}
-    <table>
+    <table class="table">
         {{ form.as_table }}
     </table>
     <br>
